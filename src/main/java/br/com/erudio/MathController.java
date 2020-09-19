@@ -6,41 +6,93 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.erudio.exception.UnsuportedMathOperationException;
+import br.com.erudio.util.NumberConverter;
+import br.com.erudio.util.SimpleMath;
 
 @RestController
 public class MathController {
+
+	private SimpleMath math = new SimpleMath();
 
 	@RequestMapping(value = "sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double sum(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo)
 			throws Exception {
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
 			throw new UnsuportedMathOperationException("Please set a numeric value");
 		}
 
-		Double sum = convertToDouble(numberOne) + convertToDouble(numberTwo);
-		return sum;
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+		Double secondNumber = NumberConverter.convertToDouble(numberTwo);
+
+		return math.sum(firstNumber, secondNumber);
 	}
 
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null)
-			return 0D;
+	@RequestMapping(value = "sub/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double sub(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo)
+			throws Exception {
 
-		String number = strNumber.replaceAll(",", ".");
+		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value");
+		}
 
-		if (isNumeric(number))
-			return Double.parseDouble(number);
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+		Double secondNumber = NumberConverter.convertToDouble(numberTwo);
 
-		return 0D;
+		return math.sub(firstNumber, secondNumber);
 	}
 
-	private boolean isNumeric(String strNumber) {
-		if (strNumber == null)
-			return false;
+	@RequestMapping(value = "mult/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double mult(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo)
+			throws Exception {
 
-		String number = strNumber.replaceAll(",", ".");
+		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value");
+		}
 
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+		Double secondNumber = NumberConverter.convertToDouble(numberTwo);
+
+		return math.mult(firstNumber, secondNumber);
 	}
 
+	@RequestMapping(value = "div/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double div(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo)
+			throws Exception {
+
+		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value");
+		}
+
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+		Double secondNumber = NumberConverter.convertToDouble(numberTwo);
+
+		return math.div(firstNumber, secondNumber);
+	}
+
+	@RequestMapping(value = "avg/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double avg(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo)
+			throws Exception {
+
+		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value");
+		}
+
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+		Double secondNumber = NumberConverter.convertToDouble(numberTwo);
+
+		return math.avg(firstNumber, secondNumber);
+	}
+
+	@RequestMapping(value = "sqrt/{numberOne}", method = RequestMethod.GET)
+	public Double sqrt(@PathVariable("numberOne") String numberOne) throws Exception {
+
+		if (!NumberConverter.isNumeric(numberOne)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value");
+		}
+
+		Double firstNumber = NumberConverter.convertToDouble(numberOne);
+
+		return math.sqrt(firstNumber);
+	}
 }
