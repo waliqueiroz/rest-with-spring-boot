@@ -1,61 +1,51 @@
 package br.com.erudio.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.erudio.exception.ResourceNotFoundException;
 import br.com.erudio.model.Person;
+import br.com.erudio.repository.PersonRepository;
 
 @Service
 public class PersonService {
 
-    private final AtomicLong counter = new AtomicLong();
+    @Autowired
+    private PersonRepository personRepository;
+
+    public List<Person> findAll() {
+        return personRepository.findAll();
+    }
 
     public Person create(Person person) {
-        return person;
+        return personRepository.save(person);
     }
 
     public Person update(Person person) {
-        return person;
+
+        Person entity = personRepository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
+
+        entity.setFirstName(person.getFirstName());
+        entity.setLastName(person.getLastName());
+        entity.setAddress(person.getAddress());
+        entity.setGender(person.getGender());
+
+        return personRepository.save(entity);
     }
 
-    public void delete(String id) {
+    public Person findById(Long id) {
+        return personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
     }
 
-    public Person findById(String id) {
-        Person person = new Person();
+    public void delete(Long id) {
+        Person entity = personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID."));
 
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Wali");
-        person.setLastName("Queiroz");
-        person.setAddress("Rua Manoel Vitorino");
-        person.setGender("Male");
-
-        return person;
+        personRepository.delete(entity);
     }
 
-    public List<Person> findAll() {
-        List<Person> persons = new ArrayList<Person>();
-
-        for (int i = 0; i < 8; i++) {
-            Person person = mockPerson(i);
-            persons.add(person);
-        }
-
-        return persons;
-    }
-
-    private Person mockPerson(int i) {
-        Person person = new Person();
-
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Person First Name" + i);
-        person.setLastName("Person Last Name" + i);
-        person.setAddress("Person Address" + i);
-        person.setGender("Male");
-
-        return person;
-    }
 }

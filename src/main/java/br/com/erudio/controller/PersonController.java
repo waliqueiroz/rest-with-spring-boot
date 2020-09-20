@@ -3,7 +3,6 @@ package br.com.erudio.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,28 +22,28 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping
 	public Person create(@RequestBody Person person) {
 		return personService.create(person);
 	}
 
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping
 	public Person update(@RequestBody Person person) {
 		return personService.create(person);
 	}
 
-	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable String id) {
+	@GetMapping("/{id}")
+	public Person findById(@PathVariable Long id) {
 		return personService.findById(id);
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping
 	public List<Person> findAll() {
 		return personService.findAll();
 	}
 
-	@DeleteMapping(value = "/{id}")
-	public void delete(@PathVariable String id) {
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
 		personService.delete(id);
 	}
 
