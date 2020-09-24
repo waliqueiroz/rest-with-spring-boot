@@ -3,11 +3,18 @@ package br.com.erudio.data.vo;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.dozermapper.core.Mapping;
+
+import org.springframework.hateoas.ResourceSupport;
+
+public class PersonVO extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @Mapping("id")
+    @JsonProperty("id")
+    private Long key;
 
     private String firstName;
 
@@ -17,12 +24,12 @@ public class PersonVO implements Serializable {
 
     private String address;
 
-    public Long getId() {
-        return this.id;
+    public Long getKey() {
+        return this.key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(Long key) {
+        this.key = key;
     }
 
     public String getFirstName() {
@@ -64,15 +71,15 @@ public class PersonVO implements Serializable {
         if (!(o instanceof PersonVO)) {
             return false;
         }
-        PersonVO person = (PersonVO) o;
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName)
-                && Objects.equals(lastName, person.lastName) && Objects.equals(gender, person.gender)
-                && Objects.equals(address, person.address);
+        PersonVO personVO = (PersonVO) o;
+        return Objects.equals(key, personVO.key) && Objects.equals(firstName, personVO.firstName)
+                && Objects.equals(lastName, personVO.lastName) && Objects.equals(gender, personVO.gender)
+                && Objects.equals(address, personVO.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, gender, address);
+        return Objects.hash(key, firstName, lastName, gender, address);
     }
 
 }
