@@ -1,0 +1,13 @@
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\exception\ExceptionResponse.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\service\PersonService.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\repository\PersonRepository.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\exception\handler\CustomizedEntityResponseExceptionHandler.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\config\WebConfig.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\data\model\Person.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\config\SwaggerConfig.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\serialization\converter\YamlJackson2HttpMessageConverter.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\controller\PersonController.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\Startup.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\converter\DozerConverter.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\data\vo\PersonVO.java
+C:\Users\wali.santos\Documents\Curso SpringBoot\rest-with-spring-boot\src\main\java\br\com\erudio\exception\ResourceNotFoundException.java
