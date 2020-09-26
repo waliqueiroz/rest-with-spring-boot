@@ -17,7 +17,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import br.com.erudio.data.vo.PersonVO;
 import br.com.erudio.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
+@Api(value = "Person Endpoint", description = "Description for person", tags = { "Person Endpoint" })
 @RestController
 @RequestMapping("/person")
 public class PersonController {
@@ -25,6 +28,7 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 
+	@ApiOperation(value = "Find all people recorded")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll() {
 		List<PersonVO> persons = personService.findAll();
