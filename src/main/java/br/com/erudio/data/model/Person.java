@@ -32,6 +32,9 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 100)
     private String address;
 
+    @Column(nullable = false)
+    private boolean enabled;
+
     public Long getId() {
         return this.id;
     }
@@ -72,6 +75,18 @@ public class Person implements Serializable {
         this.address = address;
     }
 
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -82,12 +97,12 @@ public class Person implements Serializable {
         Person person = (Person) o;
         return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName)
                 && Objects.equals(lastName, person.lastName) && Objects.equals(gender, person.gender)
-                && Objects.equals(address, person.address);
+                && Objects.equals(address, person.address) && enabled == person.enabled;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, gender, address);
+        return Objects.hash(id, firstName, lastName, gender, address, enabled);
     }
 
 }

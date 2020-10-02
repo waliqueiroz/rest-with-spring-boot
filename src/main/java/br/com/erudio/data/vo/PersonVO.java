@@ -9,7 +9,7 @@ import com.github.dozermapper.core.Mapping;
 
 import org.springframework.hateoas.ResourceSupport;
 
-@JsonPropertyOrder({ "id", "firstName", "lastName", "address", "gender" })
+@JsonPropertyOrder({ "id", "firstName", "lastName", "address", "gender", "enabled" })
 public class PersonVO extends ResourceSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,6 +25,8 @@ public class PersonVO extends ResourceSupport implements Serializable {
     private String gender;
 
     private String address;
+
+    private boolean enabled;
 
     public Long getKey() {
         return this.key;
@@ -66,6 +68,18 @@ public class PersonVO extends ResourceSupport implements Serializable {
         this.address = address;
     }
 
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -76,12 +90,12 @@ public class PersonVO extends ResourceSupport implements Serializable {
         PersonVO personVO = (PersonVO) o;
         return Objects.equals(key, personVO.key) && Objects.equals(firstName, personVO.firstName)
                 && Objects.equals(lastName, personVO.lastName) && Objects.equals(gender, personVO.gender)
-                && Objects.equals(address, personVO.address);
+                && Objects.equals(address, personVO.address) && enabled == personVO.enabled;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key, firstName, lastName, gender, address);
+        return Objects.hash(key, firstName, lastName, gender, address, enabled);
     }
 
 }

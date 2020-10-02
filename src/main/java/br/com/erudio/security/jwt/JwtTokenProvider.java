@@ -15,9 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import br.com.erudio.exception.InvalidJWTAuthenticationException;
+import br.com.erudio.exception.InvalidJwtAuthenticationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -71,14 +72,12 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
             }
-
             return true;
-        } catch (Exception e) {
-            throw new InvalidJWTAuthenticationException("Expired or invalid token");
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new InvalidJwtAuthenticationException("Expired or invalid JWT token");
         }
     }
 

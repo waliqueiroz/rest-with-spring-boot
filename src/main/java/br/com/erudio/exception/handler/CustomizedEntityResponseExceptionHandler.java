@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.erudio.exception.ExceptionResponse;
-import br.com.erudio.exception.InvalidJWTAuthenticationException;
+import br.com.erudio.exception.InvalidJwtAuthenticationException;
 import br.com.erudio.exception.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -34,12 +34,12 @@ public class CustomizedEntityResponseExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(InvalidJWTAuthenticationException.class)
-    public final ResponseEntity<ExceptionResponse> handleInvalidJWTAuthenticationExceptions(Exception ex,
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJWTAuthenticationException(Exception ex,
             WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false));
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }

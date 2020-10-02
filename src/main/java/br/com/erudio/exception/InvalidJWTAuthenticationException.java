@@ -5,11 +5,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
-public class InvalidJWTAuthenticationException extends AuthenticationException {
+public class InvalidJwtAuthenticationException extends AuthenticationException {
 
     private static final long serialVersionUID = 1L;
 
-    public InvalidJWTAuthenticationException(String exception) {
+    public InvalidJwtAuthenticationException(String exception) {
         super(exception);
     }
 }
