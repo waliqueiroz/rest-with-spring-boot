@@ -1,8 +1,8 @@
 package br.com.erudio.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +18,18 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public List<PersonVO> findAll() {
-        return DozerConverter.parseListObjects(personRepository.findAll(), PersonVO.class);
+    public Page<PersonVO> findAll(Pageable pageable) {
+        Page<Person> entities = personRepository.findAll(pageable);
+        return entities.map(this::convertToPersonVo);
+    }
+
+    public Page<PersonVO> findPersonByName(String firstName, Pageable pageable) {
+        Page<Person> entities = personRepository.findPersonByName(firstName, pageable);
+        return entities.map(this::convertToPersonVo);
+    }
+
+    private PersonVO convertToPersonVo(Person person) {
+        return DozerConverter.parseObject(person, PersonVO.class);
     }
 
     public PersonVO create(PersonVO person) {
